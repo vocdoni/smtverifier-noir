@@ -2,6 +2,7 @@
 
 Port of [Circom Sparse Merkle Tree verifier](https://github.com/iden3/circomlib/blob/master/circuits/smt/smtverifier.circom) to Noir (v0.6.0).
 
+Compatible with [Vocdoni's Go implementation (Arbo by @arnaucube)](https://github.com/vocdoni/vocdoni-node/tree/main/tree/arbo).
 
 ## Example
 
@@ -28,3 +29,6 @@ fn main(root : pub Field, key : Field, value : Field, siblings : [Field; 160]) {
     ```bash
     nargo check
     ```
+---
+
+DISCLAIMER: This repository provides proof-of-concept implementations. These implementations are for demonstration purposes only. These circuits are not audited, and this is not intended to be used as a library for production-grade applications.
