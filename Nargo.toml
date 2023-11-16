@@ -1,6 +1,7 @@
 [package]
-name = "smtverifier-noir"
+name = "smtverifier_noir"
+type = "lib"
 authors = ["Vocdoni"]
-compiler_version = "0.6.0"
+compiler_version = "0.19.2"
 
 [dependencies]
