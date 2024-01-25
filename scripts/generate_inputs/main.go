@@ -14,8 +14,10 @@ import (
 )
 
 type NoirInputs struct {
-	Root, Key, Value *big.Int
-	Siblings         []*big.Int
+	Root *big.Int `toml:"root"`
+	Key  *big.Int `toml:"key"`
+	Value *big.Int `toml:"value"`
+	Siblings         []*big.Int `toml:"siblings"`
 }
 
 const DefaultZkAddressLen = 20
@@ -140,7 +142,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	if err := os.WriteFile("../../Prover.toml", encInputs, 0644); err != nil {
+	if err := os.WriteFile("../../example/Prover.toml", encInputs, 0644); err != nil {
 		panic(err)
 	}
 }

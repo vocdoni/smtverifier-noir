@@ -1,0 +1,8 @@
+[package]
+name = "smtverifier_noir"
+authors = ["Vocdoni"]
+compiler_version = ">=0.22.0"
+type = "lib"
+license = "AGPL-3.0-only"
+
+[dependencies]
