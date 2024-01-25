@@ -1,10 +1,11 @@
 use crate::helpers;
 use dep::std;
 
-fn verify(root : Field, key : Field, value : Field, siblings : [Field]) {
+pub fn verify<N>(root : Field, key : Field, value : Field, siblings : [Field; N]) {
     verifyExtended(1, root, 0, 0, 0, key, value, 0, siblings);
 }
 
+#[field(bn254)]
 fn verifyExtended<N>(enabled : Field, root : Field, oldKey : Field, oldValue : Field, 
     isOld0 : Field, key : Field, value : Field, fnc : Field, siblings : [Field; N]) {
     let nLevels = siblings.len() as Field;
@@ -98,6 +99,7 @@ fn levelVerifier(stTop : Field, stInew : Field, stIold : Field, sibling : Field,
 }
 
 #[test]
+#[field(bn254)]
 fn test_verify() {
     let root = 21135506078746510573119705753579567335835726524098367527812922933644667691006;
     let key = 500400244448261235194511589700085192056257072811;
@@ -146,6 +148,7 @@ fn test_smVerifier() {
 }
 
 #[test]
+#[field(bn254)]
 fn test_levelVerifier() {
     let res = 7853200120776062878684798364095072458815029376092732009249414926327459813532;
     assert(levelVerifier(1, 1, 1, 2, 1, 1, 0, 1) == res);

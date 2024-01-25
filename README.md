@@ -1,13 +1,13 @@
 # smtverifier-noir
 
-Port of [Circom Sparse Merkle Tree verifier](https://github.com/iden3/circomlib/blob/master/circuits/smt/smtverifier.circom) to Noir (v0.6.0).
+Port of [Circom Sparse Merkle Tree verifier](https://github.com/iden3/circomlib/blob/master/circuits/smt/smtverifier.circom) to Noir (v0.22.0 or later).
 
 Compatible with [Vocdoni's Go implementation (Arbo by @arnaucube)](https://github.com/vocdoni/vocdoni-node/tree/main/tree/arbo).
 
 ## Example
 
 Requires Nargo: 
-> nargo 0.6.0 (git version hash: 7bad243f2da93337afdddd832dd6467c8c8ddfb2, is dirty: false)
+> nargo 0.22.0 (git version hash: 4b16090beecd0fcdd41c9e7b8f615c4625c26a5b, is dirty: false)
 
 
 Noir example source code *example/src/main.nr*:

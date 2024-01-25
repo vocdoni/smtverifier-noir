@@ -4,7 +4,8 @@ use dep::std;
 // providedhashing it with the predefined hashing function 'H':
 //
 //	newLeafValue = H(key | value | 1)
-fn endLeafValue(k : Field, v : Field) -> Field {
+#[field(bn254)]
+pub(crate) fn endLeafValue(k : Field, v : Field) -> Field {
     std::hash::poseidon::bn254::hash_3([k, v, 1])
 }
 
@@ -12,11 +13,12 @@ fn endLeafValue(k : Field, v : Field) -> Field {
 // key-value pair providedhashing it with the predefined hashing function 'H':
 //
 //	intermediateLeafValue = H(l | r)
-fn intermediateLeafValue(l : Field, r : Field) -> Field {
+#[field(bn254)]
+pub(crate) fn intermediateLeafValue(l : Field, r : Field) -> Field {
 	std::hash::poseidon::bn254::hash_2([l, r])
 }
 
-fn switcher(sel : u1, l : Field, r : Field) -> (Field, Field) {
+pub(crate) fn switcher(sel : u1, l : Field, r : Field) -> (Field, Field) {
     if sel == 0 {
         (l, r)
     } else {
@@ -24,8 +26,24 @@ fn switcher(sel : u1, l : Field, r : Field) -> (Field, Field) {
     }
 }
 
-fn multiAnd<N>(arr : [Field; N]) -> Field {
-    arr.reduce(|a, b| a & b)
+// Bitwise AND for Field elements
+// REVIEW: Fixed byte len
+#[field(bn254)]
+fn fieldAnd(a: Field, b: Field) -> Field {
+    let a_bytes = a.to_be_bytes(32);
+    let b_bytes = b.to_be_bytes(32);
+
+    let mut c = [0;32];
+
+    for i in 0..32 {
+        c[i] = a_bytes[i] & b_bytes[i];
+    }
+
+    std::field::bytes32_to_field(c)
+}
+
+pub(crate) fn multiAnd<N>(arr : [Field; N]) -> Field {
+    arr.reduce(|a, b| fieldAnd(a,b))
 }
 
 #[test]
